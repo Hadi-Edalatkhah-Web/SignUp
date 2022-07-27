@@ -16,10 +16,10 @@ export const Validate=(data)=>{
     //  Email +++++++++++++++++++++++++++++
     ///////////////////////////////////////
 
-    const emailRegex= /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/; 
+    const emailRegex= /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/; 
     if(!data.email.trim())
     {
-        errors.email="name required"
+        errors.email="email required"
 
     }
     else if(!emailRegex.test(data.email))
@@ -37,17 +37,17 @@ export const Validate=(data)=>{
     const passwordRegex=/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
     if(!passwordRegex.test(data.password))
     {
-        errors.email="use UpperCase ande LowerCase and $%^& in your password"
+        errors.password="password invalid"
 
     }
     else{
-        delete errors.email;
+        delete errors.password;
     }
 
     // confirmPassword ++++++++++++++++++++
     ///////////////////////////////////////
 
-    if(!data.confirmPassword === data.password)
+    if(data.password !== data.confirmPassword)
     {
         errors.confirmPassword="passwords not match"
     }
@@ -66,6 +66,6 @@ export const Validate=(data)=>{
     {
         delete errors.isAccepted
     }
-
+return errors
  }
 
